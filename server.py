@@ -21,7 +21,9 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """homepage"""
 
-    return render_template("index.html")
+
+    return "hello world"
+    # render_template("index.html")
 
 ################################################################################
 if __name__ == "__main__":

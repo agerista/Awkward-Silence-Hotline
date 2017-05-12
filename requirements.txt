@@ -1,10 +1,13 @@
 appdirs==1.4.3
 asn1crypto==0.22.0
+blinker==1.4
 cffi==1.10.0
 click==6.7
 cryptography==1.8.1
 enum34==1.1.6
 Flask==0.12.1
+Flask-DebugToolbar==0.10.1
+Flask-SQLAlchemy==2.2
 idna==2.5
 ipaddress==1.0.18
 itsdangerous==0.24
@@ -19,5 +22,6 @@ pyparsing==2.2.0
 pytz==2017.2
 requests==2.14.2
 six==1.10.0
+SQLAlchemy==1.1.9
 twilio==6.0.0
 Werkzeug==0.12.1
