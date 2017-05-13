@@ -19,7 +19,7 @@ class User(db.Model):
     first_name = db.Column(db.String(40))
     last_name = db.Column(db.String(40))
 
-    xxx = db.relationship()
+    # xxx = db.relationship()
 
     def __repr__(self):
         """Provide helpful representation when printed"""
