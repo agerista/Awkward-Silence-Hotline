@@ -2,8 +2,8 @@
 
 from sqlalchemy import func
 from model import connect_to_db, db
-from model import ###
-from xxx import ###
+# from model import ###
+# from xxx import ###
 
 
 def seed_table():
