@@ -29,7 +29,7 @@ def index():
     print "Hello World"
     print "trial run"
     print "testing heroku"
-    return "It finally worked!"
+    return render_template("base.html")
     # app.send_static_file('index.html')
 
 
