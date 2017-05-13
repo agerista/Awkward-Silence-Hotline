@@ -12,3 +12,6 @@ def offer_greeting():
 
     return "<html><body>Hi, %s. I think you're %s!</body></html>" % (
         player, nice_thing)
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0')
