@@ -1,4 +1,5 @@
-"""Awkward Silence Generator."""
+
+from random import choice
 
 import os, re;
 from jinja2 import StrictUndefined
@@ -10,6 +11,13 @@ from faker import Factory
 from twilio.jwt.client import ClientCapabilityToken
 from twilio.twiml.voice_response import VoiceResponse
 
+COMPLIMENTS = ["smart", "clever", "tenacious", "awesome", "Pythonic"]
+
+
+@app.route('/')
+def offer_greeting():
+    """Greet user."""
+
 
 app = Flask(__name__)
 fake = Factory.create()
@@ -17,8 +25,12 @@ alphanumeric_only = re.compile('[\W_]+')
 phone_pattern = re.compile(r"^[\d\+\-\(\) ]+$")
 
 
-# Required to use Flask sessions and the debug toolbar
-app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
+    player = request.args.get("person")  # ... what the user typed!
+    nice_thing = choice(COMPLIMENTS)
+
+
+    return "<html><body>Hi, %s. I think you're %s!</body></html>" % (
+        player, nice_thing)
 
 # Normally, if you use an undefined variable in Jinja2, it fails
 # silently. This is horrible. Fix this so that, instead, it raises an
