@@ -28,6 +28,9 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def index():
+    print "Hello World"
+    print "trial run"
+    print "testing heroku"
     return app.send_static_file('index.html')
 
 
