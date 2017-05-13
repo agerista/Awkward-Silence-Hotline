@@ -1,7 +1,6 @@
 
-from random import choice
 
-
+from intro_to_flask import app
 import os, re;
 from jinja2 import StrictUndefined
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
