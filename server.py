@@ -14,4 +14,5 @@ def offer_greeting():
         player, nice_thing)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    DEBUG = "NO_DEBUG" not in os.environ
+    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
