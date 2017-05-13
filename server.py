@@ -7,7 +7,7 @@ COMPLIMENTS = ["smart", "clever", "tenacious", "awesome", "Pythonic"]
 def offer_greeting():
     """Greet user."""
 
-    player = request.args.get("person")  # ... what the user typed!
+    player = "you"  # ... what the user typed!
     nice_thing = choice(COMPLIMENTS)
 
     return "<html><body>Hi, %s. I think you're %s!</body></html>" % (
