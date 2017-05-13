@@ -1,6 +1,7 @@
 
 from random import choice
 
+<<<<<<< HEAD
 import os, re;
 from jinja2 import StrictUndefined
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
@@ -12,12 +13,15 @@ from twilio.jwt.client import ClientCapabilityToken
 from twilio.twiml.voice_response import VoiceResponse
 
 COMPLIMENTS = ["smart", "clever", "tenacious", "awesome", "Pythonic"]
+=======
+>>>>>>> 3a045dd9ebc7446db2e5eda09ec8435df8f5d700
 
 
 @app.route('/')
 def offer_greeting():
     """Greet user."""
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 app = Flask(__name__)
@@ -35,6 +39,9 @@ phone_pattern = re.compile(r"^[\d\+\-\(\) ]+$")
 
     return "<html><body>Hi, %s. I think you're %s!</body></html>" % (
         player, nice_thing)
+=======
+    return "<html><body>awkward....</body></html>" 
+>>>>>>> 3a045dd9ebc7446db2e5eda09ec8435df8f5d700
 
 # Normally, if you use an undefined variable in Jinja2, it fails
 # silently. This is horrible. Fix this so that, instead, it raises an
