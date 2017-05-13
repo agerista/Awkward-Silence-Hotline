@@ -7,9 +7,9 @@ from flask import Flask, jsonify, render_template, redirect, request, Response, 
 
 
 app = Flask(__name__)
-fake = Factory.create()
-alphanumeric_only = re.compile('[\W_]+')
-phone_pattern = re.compile(r"^[\d\+\-\(\) ]+$")
+# fake = Factory.create()
+# alphanumeric_only = re.compile('[\W_]+')
+# phone_pattern = re.compile(r"^[\d\+\-\(\) ]+$")
 
 # Normally, if you use an undefined variable in Jinja2, it fails
 # silently. This is horrible. Fix this so that, instead, it raises an
