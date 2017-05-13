@@ -12,32 +12,12 @@ from faker import Factory
 from twilio.jwt.client import ClientCapabilityToken
 from twilio.twiml.voice_response import VoiceResponse
 
-COMPLIMENTS = ["smart", "clever", "tenacious", "awesome", "Pythonic"]
-
-
-
-@app.route('/')
-def offer_greeting():
-    """Greet user."""
-
-
 
 app = Flask(__name__)
 fake = Factory.create()
 alphanumeric_only = re.compile('[\W_]+')
 phone_pattern = re.compile(r"^[\d\+\-\(\) ]+$")
 
-
-    player = request.args.get("person")  # ... what the user typed!
-
-    player = "you"  # ... what the user typed!
-
-    nice_thing = choice(COMPLIMENTS)
-
-
-    return "<html><body>Hi, %s. I think you're %s!</body></html>" % (
-        player, nice_thing)
-    return "<html><body>awkward....</body></html>" 
 
 
 # Normally, if you use an undefined variable in Jinja2, it fails
