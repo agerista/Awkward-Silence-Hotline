@@ -1,15 +1,18 @@
 """Awkward Silence Generator."""
 
+import os
 from jinja2 import StrictUndefined
 from flask import Flask, jsonify, render_template, redirect, request, flash, session
-# from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db
+from twilio.twiml.voice_response import VoiceResponse
+
 
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5"
+app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 
 # Normally, if you use an undefined variable in Jinja2, it fails
 # silently. This is horrible. Fix this so that, instead, it raises an
@@ -17,13 +20,37 @@ app.secret_key = "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5"
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route('/')
-def index():
-    """homepage"""
+callers = {
+    "+14152403836": "Amanda",
+    "+14155198551": "Nathan",
+    "+14153749942": "Renee",
+}
 
 
-    return "hello world"
-    # render_template("index.html")
+@app.route("/monkey", methods=['GET', 'POST'])
+def hello_monkey():
+    """Respond to incoming requests."""
+
+    print "Trying to learn all about the twilio API"
+
+    from_number = request.values.get('From', None)
+
+    # if the caller is someone we know:
+    if from_number in callers:
+
+        caller = callers[from_number]
+    else:
+        caller = "Monkey"
+
+    resp = VoiceResponse()
+    # Greet the caller by name
+    resp.say("Hello " + callers[from_number] + ", you monkey")
+    # Play an MP3
+    resp.play("http://awkward-silence-generator.herokuapp.com/monkey.mp3")
+
+
+    return str(resp)
+
 
 ################################################################################
 if __name__ == "__main__":
@@ -40,6 +67,7 @@ if __name__ == "__main__":
     # DebugToolbarExtension(app)
     # app.run(port=5000, host='0.0.0.0')
 
+    DEBUG = "NO_DEBUG" not in os.environ
     PORT = int(os.environ.get("PORT", 5000))
 
-    app.run(host="0.0.0.0", port=PORT)
+    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
