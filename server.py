@@ -18,6 +18,7 @@ COMPLIMENTS = ["smart", "clever", "tenacious", "awesome", "Pythonic"]
 def offer_greeting():
     """Greet user."""
 
+<<<<<<< HEAD
 
 app = Flask(__name__)
 fake = Factory.create()
@@ -26,6 +27,9 @@ phone_pattern = re.compile(r"^[\d\+\-\(\) ]+$")
 
 
     player = request.args.get("person")  # ... what the user typed!
+=======
+    player = "you"  # ... what the user typed!
+>>>>>>> 969b2c7e7a4c91240719c47d0cd287f98a7056b5
     nice_thing = choice(COMPLIMENTS)
 
 
@@ -85,6 +89,7 @@ def voice():
 
 ################################################################################
 if __name__ == "__main__":
+<<<<<<< HEAD
 
     # We have to set debug=True here, since it has to be True at the
     # point that we invoke the DebugToolbarExtension
@@ -101,4 +106,7 @@ if __name__ == "__main__":
     DEBUG = "NO_DEBUG" not in os.environ
     PORT = int(os.environ.get("PORT", 5000))
 
+=======
+    DEBUG = "NO_DEBUG" not in os.environ
+>>>>>>> 969b2c7e7a4c91240719c47d0cd287f98a7056b5
     app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
