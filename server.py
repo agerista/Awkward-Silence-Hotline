@@ -57,33 +57,23 @@ def awkward_menu():
     if digit_pressed == "1":
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
-        resp.say("Yes well I declare, uhhhhhh, ummmmmm, well")
-        time.sleep(2)
-        resp.say("I mean I...uhhh...")
+        resp.say("Yes well I declare, uhhhhhh, ummmmmm, well" + time.sleep(5) + "I mean I...uhhh...")
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
-        resp.say("My shower cam is no bigger than that fly in your soup.")
-        time.sleep(2)
-        resp.say("well...")
+        resp.say("My shower cam is no bigger than that fly in your soup." + time.sleep(5) + "well...")
         resp.record(maxLength="30", action="/handle-recording", method="POST")
         return str(resp)
 
     elif digit_pressed == "3":
         resp = VoiceResponse()
-        resp.say("I believe I'm about to throw up.")
-        time.sleep(2)
-        resp.say("don't you love me?...")
-        resp.record(maxLength="30", action="/handle-recording", method="POST")
-        return str(resp)   
-
+        resp.say("I believe I'm about to throw up." + time.sleep(5) + "don't you love me?...")
+        return str(resp)
 
     elif digit_pressed == "4":
         resp = VoiceResponse()
-        resp.say("The secret ingredient is puppy tears.")
-        time.sleep(3)
-        resp.say("I mean salt")
+        resp.say("The secret ingredient is puppy tears." + time.sleep(5) + "I mean salt")
 
         return str(resp)
 
