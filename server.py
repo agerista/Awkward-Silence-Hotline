@@ -2,9 +2,13 @@
 import os, re;
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
 from faker import Factory
-from twilio.jwt.client import ClientCapabilityToken
-from twilio.twiml.voice_response import VoiceResponse
+from twilio.jwt.access_token import AccessToken, VoiceGrant
+from twilio.rest import Client
+import twilio.twiml
 
+
+IDENTITY = 'voice_test'
+CALLER_ID = 'quick_start'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
@@ -12,10 +16,11 @@ fake = Factory.create()
 alphanumeric_only = re.compile('[\W_]+')
 phone_pattern = re.compile(r"^[\d\+\-\(\) ]+$")
 
-TWILIO_ACCOUNT_SID=os.environ[TWILIO_ACCOUNT_SID]
-TWILIO_TWIML_APP_SID=os.environ[TWILIO_TWIML_APP_SID]
-TWILIO_AUTH_TOKEN=os.environ[TWILIO_AUTH_TOKEN]
-TWILIO_CALLER_ID=os.environ[TWILIO_CALLER_ID]
+TWILIO_ACCOUNT_SID = os.environ[TWILIO_ACCOUNT_SID]
+TWILIO_TWIML_APP_SID = os.environ[TWILIO_TWIML_APP_SID]
+TWILIO_AUTH_TOKEN = os.environ[TWILIO_AUTH_TOKEN]
+TWILIO_CALLER_ID = os.environ[TWILIO_CALLER_ID]
+
 
 @app.route('/')
 def index():
