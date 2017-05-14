@@ -4,7 +4,7 @@ from flask import Flask, jsonify, render_template, redirect, request, Response, 
 # from faker import Factory
 # from twilio.jwt.access_token import AccessToken
 from twilio import twiml
-from twilio.rest import TwilioRestClient
+# from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse, Gather
 
 
