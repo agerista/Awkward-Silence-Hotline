@@ -62,8 +62,8 @@ def awkward_menu():
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
         resp.say("Yes well I declare, uhhhhhh, ummmmmm, well")
-        time.sleep(5)
-        resp.say("I mean I...uhhh...")
+        resp.append(resp.pause(5))
+        resp.append(resp.say("I mean I...uhhh..."))
 
         return str(resp)
 
@@ -71,7 +71,7 @@ def awkward_menu():
 
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup.")
-        time.sleep(5)
+        resp.pause(5)
         resp.say("well...")
 
         return str(resp)
@@ -80,7 +80,7 @@ def awkward_menu():
 
         resp = VoiceResponse()
         resp.say("I believe I'm about to throw up.")
-        time.sleep(5)
+        resp.pause(5)
         resp.say("don't you love me?...")
 
         return str(resp)
@@ -89,7 +89,7 @@ def awkward_menu():
 
         resp = VoiceResponse()
         resp.say("The secret ingredient is puppy tears.")
-        time.sleep(5)
+        resp.pause(5)
         resp.say("I mean salt")
 
         return str(resp)
