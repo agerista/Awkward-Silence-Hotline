@@ -53,7 +53,7 @@ def awkward_silence_hotline():
 
     resp.append(g)
 
-    return str(resp)
+    return (str(resp), "index.html")
 
 
 @app.route("/handle-key", methods=['GET', 'POST'])
