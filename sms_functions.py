@@ -24,6 +24,8 @@ def eval_phone(phone_raw):
     else:
         response = "not a valid phone number.  try again!"
 
+    return response
+
 
 def send_sms_message(recepient_phone):
 
@@ -31,9 +33,9 @@ def send_sms_message(recepient_phone):
     client = Client(ACCOUNT_SID, AUTH_TOKEN)
     message = client.messages.create(
         to=recepient_phone,
-        # from=CALLER_ID,     #why not working????
+        from_=CALLER_ID,
         body=sms_string,
-        media_url="https://climacons.herokuapp.com/clear.png",
+        media_url="http://www.nicknotas.com/wp-content/uploads/2012/08/Troy_and_LeVar_Burton.jpg",
     )
 
     return """confirmed!  sent '%s' to %s """ % (sms_string, recepient_phone)
