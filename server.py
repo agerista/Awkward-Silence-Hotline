@@ -82,7 +82,12 @@ def awkward_menu():
 
         client = Client(account_sid, auth_token)
 
-        client.recordings("CA67fdd24aafcbb577f832f480c78dd7f5")
+        # client.recordings.play("CA67fdd24aafcbb577f832f480c78dd7f5")
+        recordings = client.recordings.list(date_created=date(2017, 05, 14))
+
+        for recording in recordings:
+            print recording.play()
+
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup.")
         resp.pause(15)
