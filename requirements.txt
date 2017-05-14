@@ -5,6 +5,7 @@ cffi==1.10.0
 click==6.7
 cryptography==1.8.1
 enum34==1.1.6
+fake-factory==0.5.3
 Flask==0.12.1
 Flask-DebugToolbar==0.10.1
 Flask-SQLAlchemy==2.2
@@ -14,6 +15,7 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 packaging==16.8
+pkg-resources==0.0.0
 pycparser==2.17
 PyJWT==1.5.0
 pyOpenSSL==17.0.0
