@@ -142,7 +142,7 @@ def handle_recording():
 def awkward_text():
     """sends text to requested number."""
     # TODO need to create a page with form that accepts users phone input
-    phone_raw = request.form.get("recipient", "415-969-4250")
+    phone_raw = request.form.get("recipient")
 
     response = sms_functions.eval_phone(phone_raw)
 
@@ -151,13 +151,18 @@ def awkward_text():
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
-    resp = MessagingResponse()
+    """responds to incoming text messages automatically
+    """
+    # trying REST_API agian, rather than TwilML
+    sender_phone = request.form.get("From")
+    response = sms_functions.send_sms_message(sender_phone)
+    return render_template("confirm_sms", response=response)
 
-    sms_string = sms_functions.get_message()
 
-    resp.message(sms_string)
-
-    return str(resp)
+    # resp = MessagingResponse()
+    # sms_string = sms_functions.get_message()
+    # resp.message(sms_string)
+    # return str(resp)
 
 
 
