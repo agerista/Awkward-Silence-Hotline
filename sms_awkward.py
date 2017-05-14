@@ -1,4 +1,9 @@
 import sms_functions
+from flask import Flask, render_template, request
+from jinja2 import StrictUndefined
+
+app = Flask(__name__)
+app.jinja_env.endefined = StrictUndefined
 
 
 @app.route("/message", methods=['POST'])
