@@ -1,10 +1,10 @@
 
 import os, re;
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
-from faker import Factory
-from twilio.jwt.access_token import AccessToken, VoiceGrant
+# from faker import Factory
+# from twilio.jwt.access_token import AccessToken
 # from twilio.rest import Client
-import twilio.twiml
+from twilio.twiml.voice_response import VoiceResponse
 
 
 
