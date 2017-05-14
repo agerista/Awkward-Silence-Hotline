@@ -124,16 +124,6 @@ def awkward_menu():
 
         return str(resp)
 
-    elif digit_pressed == "6":
-
-        client = Client(account_sid, auth_token)
-
-        return client.recordings.play("CA67fdd24aafcbb577f832f480c78dd7f5")
-        # recordings = client.recordings.list(date_created=date(2017, 05, 14))
-
-        # for recording in recordings:
-        #      recording.play()
-
     # If the caller pressed anything but 1-5, redirect them to the homepage.
     else:
         return redirect("/")
