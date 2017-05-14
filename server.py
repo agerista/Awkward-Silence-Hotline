@@ -37,7 +37,7 @@ def awkward_silence_hotline():
     # resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
 
     # Gather digits.
-    with resp.gather(numDigits=1, action="/handle-key", method="POST") as g:
+    with resp.gather(timeout="5", numDigits=1, action="/handle-key", method="POST") as g:
         g.say("""I am the Lord Mayor of Awkward Town, press 1.
                  Press 2 for I have foot in mouth disease.
                  Press 3 for my boyfriend just broke up with me and I'm pregnant.
@@ -48,7 +48,7 @@ def awkward_silence_hotline():
 
 
 @app.route("/handle-key", methods=['GET', 'POST'])
-def choose_your_own_adventure():
+def awkward_menu():
     """Handle key press from a user."""
 
     digit_pressed = request.values.get('Digits', None)
@@ -56,14 +56,14 @@ def choose_your_own_adventure():
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
         resp.say("Yes well I declare, uhhhhhh, ummmmmm, well")
-        time.sleep(20)
+        time.sleep(2)
         resp.say("I mean I...uhhh...")
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup.")
-        time.sleep(20)
+        time.sleep(2)
         resp.say("well...")
         # resp.record(maxLength="30", action="/handle-recording", method="POST")
         return str(resp)
@@ -71,7 +71,7 @@ def choose_your_own_adventure():
     elif digit_pressed == "3":
         resp = VoiceResponse()
         resp.say("I believe I'm about to throw up.")
-        time.sleep(20)
+        time.sleep(2)
         resp.say("don't you love me?...")
         # resp.record(maxLength="30", action="/handle-recording", method="POST")
         return str(resp)   
@@ -80,7 +80,7 @@ def choose_your_own_adventure():
     elif digit_pressed == "4":
         resp = VoiceResponse()
         resp.say("The secret ingredient is puppy tears.")
-        time.sleep(30)
+        time.sleep(3)
         resp.say("I mean salt")
 
         return str(resp)
