@@ -3,7 +3,7 @@ import os, re;
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
 from faker import Factory
 from twilio.jwt.access_token import AccessToken, VoiceGrant
-from twilio.rest import Client
+# from twilio.rest import Client
 import twilio.twiml
 
 
