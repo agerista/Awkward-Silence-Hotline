@@ -16,7 +16,7 @@ app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34e
 def hello_monkey():
     """Respond to incoming requests."""
     resp = VoiceResponse()
-    resp.say("Hello Monkey")
+    resp.say("Uhhhhhh")
 
     return str(resp)
 
