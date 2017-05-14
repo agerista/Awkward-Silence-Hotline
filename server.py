@@ -1,11 +1,12 @@
+"""Awkward Silence Hotline"""
 
 import os, re
-import time
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
 # from faker import Factory
 # from twilio.jwt.access_token import AccessToken
+from datetime import date
 from twilio import twiml
-# from twilio.rest import Client
+from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse, Gather
 from twilio.twiml.messaging_response import MessagingResponse
 import sms_functions
@@ -15,6 +16,9 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 app.jinja_env.endefined = StrictUndefined
+
+account_sid = os.environ["TWILIO_ACCOUNT_SID"]
+auth_token = os.environ["TWILIO_AUTH_TOKEN"]
 
 callers = {
     "+14158675309": "Curious George",
@@ -54,7 +58,7 @@ def awkward_silence_hotline():
 
     resp.append(g)
 
-    return (str(resp), "index.html")
+    return (str(resp), render_template("index.html"))
 
 
 @app.route("/handle-key", methods=['GET', 'POST'])
@@ -76,6 +80,9 @@ def awkward_menu():
 
     elif digit_pressed == "2":
 
+        client = Client(account_sid, auth_token)
+
+        client.recordings("CA67fdd24aafcbb577f832f480c78dd7f5")
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup.")
         resp.pause(15)
@@ -158,8 +165,6 @@ def sms_reply():
     resp.message(sms_string)
 
     return str(resp)
-
-
 
 ################################################################################
 if __name__ == "__main__":
