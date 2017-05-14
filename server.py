@@ -12,6 +12,10 @@ fake = Factory.create()
 alphanumeric_only = re.compile('[\W_]+')
 phone_pattern = re.compile(r"^[\d\+\-\(\) ]+$")
 
+TWILIO_ACCOUNT_SID=os.environ[TWILIO_ACCOUNT_SID]
+TWILIO_TWIML_APP_SID=os.environ[TWILIO_TWIML_APP_SID]
+TWILIO_AUTH_TOKEN=os.environ[TWILIO_AUTH_TOKEN]
+TWILIO_CALLER_ID=os.environ[TWILIO_CALLER_ID]
 
 @app.route('/')
 def index():
@@ -20,16 +24,61 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/voice", methods=['GET', 'POST'])
-def voice():
-    """Respond to incoming phone calls with a 'Hello world' message"""
-    # Start our TwiML response
-    resp = VoiceResponse()
+@app.route('/accessToken')
+def token():
 
-    # Read a message aloud to the caller
-    resp.say("hello world!", voice='alice')
+    account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
+    api_key = os.environ.get("API_KEY", API_KEY)
+    api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
+    push_credential_sid = os.environ.get("PUSH_CREDENTIAL_SID", PUSH_CREDENTIAL_SID)
+    app_sid = os.environ.get("APP_SID", APP_SID)
 
+    grant = VoiceGrant(
+        push_credential_sid=push_credential_sid,
+        outgoing_application_sid=app_sid
+      )
+
+      token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+      token.add_grant(grant)
+
+      return str(token)
+
+
+@app.route('/outgoing', methods=['GET', 'POST'])
+def outgoing():
+
+      resp = twilio.twiml.Response()
+      resp.say("Congratulations! You have made your first oubound call! Good bye.")
+      return str(resp)
+
+
+@app.route('/incoming', methods=['GET', 'POST'])
+def incoming():
+  
+    resp = twilio.twiml.Response()
+    resp.say("Congratulations! You have received your first inbound call! Good bye.")
     return str(resp)
+
+
+@app.route('/placeCall', methods=['GET', 'POST'])
+def placeCall():
+
+    account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
+    api_key = os.environ.get("API_KEY", API_KEY)
+    api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
+
+    client = Client(api_key, api_key_secret, account_sid)
+    call = client.calls.create(url=request.url_root + 'incoming', to='client:' + IDENTITY, from_='client:' + CALLER_ID)
+    return str(call.sid)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def welcome():
+
+    resp = twilio.twiml.Response()
+    resp.say("Welcome to Twilio")
+    return str(resp)
+
 ################################################################################
 if __name__ == "__main__":
 
