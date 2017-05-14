@@ -65,8 +65,8 @@ def awkward_menu():
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
         resp.say("Yes well I declare, uhhhhhh, ummmmmm, well")
-        resp.append(resp.pause(5))
-        resp.append(resp.say("I mean I...uhhh..."))
+        resp.pause(5)
+        resp.say("I mean I...uhhh...")
 
         return str(resp)
 
