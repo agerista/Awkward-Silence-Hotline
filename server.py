@@ -7,11 +7,12 @@ from twilio import twiml
 # from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse, Gather
 import sms_functions
-
+from jinja2 import StrictUndefined
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
+app.jinja_env.endefined = StrictUndefined
 
 callers = {
     "+14158675309": "Curious George",
