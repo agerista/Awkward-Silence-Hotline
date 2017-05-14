@@ -4,8 +4,8 @@ from flask import Flask, jsonify, render_template, redirect, request, Response, 
 # from faker import Factory
 # from twilio.jwt.access_token import AccessToken
 from twilio import twiml
-from twilio.rest import Client
-from twilio.twiml.voice_response import VoiceResponse
+from twilio.rest import TwilioRestClient
+from twilio.twiml.voice_response import VoiceResponse, Gather
 
 
 app = Flask(__name__)
@@ -58,32 +58,32 @@ def awkward_menu():
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
         resp.say("Yes well I declare, uhhhhhh, ummmmmm, well")
-        # time.sleep(2)
-        # resp.say("I mean I...uhhh...")
+        time.sleep(2)
+        resp.say("I mean I...uhhh...")
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup.")
-        # time.sleep(2)
-        # resp.say("well...")
-        # resp.record(maxLength="30", action="/handle-recording", method="POST")
+        time.sleep(2)
+        resp.say("well...")
+        resp.record(maxLength="30", action="/handle-recording", method="POST")
         return str(resp)
 
     elif digit_pressed == "3":
         resp = VoiceResponse()
         resp.say("I believe I'm about to throw up.")
-        # time.sleep(2)
-        # resp.say("don't you love me?...")
-        # resp.record(maxLength="30", action="/handle-recording", method="POST")
+        time.sleep(2)
+        resp.say("don't you love me?...")
+        resp.record(maxLength="30", action="/handle-recording", method="POST")
         return str(resp)   
 
 
     elif digit_pressed == "4":
         resp = VoiceResponse()
         resp.say("The secret ingredient is puppy tears.")
-        # time.sleep(3)
-        # resp.say("I mean salt")
+        time.sleep(3)
+        resp.say("I mean salt")
 
         return str(resp)
 
