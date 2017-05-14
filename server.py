@@ -32,8 +32,9 @@ def awkward_silence_hotline():
     resp = VoiceResponse()
     # Greet the caller by name
     resp.say("Hello " + caller)
-    # Play an mp3
-    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+
+    # # Play an mp3
+    # resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
 
     # Gather digits.
     with resp.gather(numDigits=1, action="/handle-key", method="POST") as g:
@@ -47,26 +48,44 @@ def awkward_silence_hotline():
 
 
 @app.route("/handle-key", methods=['GET', 'POST'])
-def handle_key():
+def choose_your_own_adventure():
     """Handle key press from a user."""
 
     digit_pressed = request.values.get('Digits', None)
     if digit_pressed == "1":
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
-        resp.dial("+13105551212")
-        # If the dial fails:
-        resp.say("The call failed, or the remote party hung up. Goodbye.")
-
+        resp.say("Yes well I declare, uhhhhhh, ummmmmm, well")
+        time.sleep(20)
+        resp.say("I mean I...uhhh...")
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
-        resp.say("Record your monkey howl after the tone.")
-        resp.record(maxLength="30", action="/handle-recording", method="POST")
+        resp.say("My shower cam is no bigger than that fly in your soup.")
+        time.sleep(20)
+        resp.say("well...")
+        # resp.record(maxLength="30", action="/handle-recording", method="POST")
         return str(resp)
 
-    # If the caller pressed anything but 1 or 2, redirect them to the homepage.
+    elif digit_pressed == "3":
+        resp = VoiceResponse()
+        resp.say("I believe I'm about to throw up.")
+        time.sleep(20)
+        resp.say("don't you love me?...")
+        # resp.record(maxLength="30", action="/handle-recording", method="POST")
+        return str(resp)   
+
+
+    elif digit_pressed == "4":
+        resp = VoiceResponse()
+        resp.say("The secret ingredient is puppy tears.")
+        time.sleep(30)
+        resp.say("I mean salt")
+
+        return str(resp)
+
+    # If the caller pressed anything but 1-5, redirect them to the homepage.
     else:
         return redirect("/")
 
