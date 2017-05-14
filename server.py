@@ -3,8 +3,10 @@ import os, re;
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
 # from faker import Factory
 # from twilio.jwt.access_token import AccessToken
-# from twilio.rest import Client
+from twilio import twiml
+from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
@@ -37,7 +39,7 @@ def awkward_silence_hotline():
     # resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
 
     # Gather digits.
-    with resp.gather(timeout="5", numDigits=1, action="/handle-key", method="POST") as g:
+    with resp.gather(timeout="15", numDigits=1, action="/handle-key", method="POST") as g:
         g.say("""I am the Lord Mayor of Awkward Town, press 1.
                  Press 2 for I have foot in mouth disease.
                  Press 3 for my boyfriend just broke up with me and I'm pregnant.
@@ -56,23 +58,23 @@ def awkward_menu():
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
         resp.say("Yes well I declare, uhhhhhh, ummmmmm, well")
-        time.sleep(2)
-        resp.say("I mean I...uhhh...")
+        # time.sleep(2)
+        # resp.say("I mean I...uhhh...")
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup.")
-        time.sleep(2)
-        resp.say("well...")
+        # time.sleep(2)
+        # resp.say("well...")
         # resp.record(maxLength="30", action="/handle-recording", method="POST")
         return str(resp)
 
     elif digit_pressed == "3":
         resp = VoiceResponse()
         resp.say("I believe I'm about to throw up.")
-        time.sleep(2)
-        resp.say("don't you love me?...")
+        # time.sleep(2)
+        # resp.say("don't you love me?...")
         # resp.record(maxLength="30", action="/handle-recording", method="POST")
         return str(resp)   
 
@@ -80,8 +82,8 @@ def awkward_menu():
     elif digit_pressed == "4":
         resp = VoiceResponse()
         resp.say("The secret ingredient is puppy tears.")
-        time.sleep(3)
-        resp.say("I mean salt")
+        # time.sleep(3)
+        # resp.say("I mean salt")
 
         return str(resp)
 
