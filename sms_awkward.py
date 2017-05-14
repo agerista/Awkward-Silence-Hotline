@@ -4,12 +4,12 @@ import sms_functions
 @app.route("/message", methods=['POST'])
 def awkward_text():
     """sends text to requested number."""
-
+    # TODO need to create a page with form that accepts users phone input
     phone_raw = request.form.get("recipient")
 
     response = sms_functions.eval_phone(phone_raw)
 
-    # return render_template(?, response)
+    return render_template("confirm_sms", response=response)
 
 
 

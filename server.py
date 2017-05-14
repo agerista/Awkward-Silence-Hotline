@@ -6,6 +6,8 @@ from flask import Flask, jsonify, render_template, redirect, request, Response, 
 from twilio import twiml
 # from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse, Gather
+import sms_functions
+
 
 
 app = Flask(__name__)
@@ -93,6 +95,17 @@ def handle_recording():
     resp.play(recording_url)
     resp.say("Goodbye.")
     return str(resp)
+
+
+@app.route("/message", methods=['POST'])
+def awkward_text():
+    """sends text to requested number."""
+    # TODO need to create a page with form that accepts users phone input
+    phone_raw = request.form.get("recipient")
+
+    response = sms_functions.eval_phone(phone_raw)
+
+    return render_template("confirm_sms", response=response)
 
 
 ################################################################################
