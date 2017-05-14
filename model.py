@@ -18,8 +18,9 @@ class User(db.Model):
     password = db.Column(db.String(100))
     first_name = db.Column(db.String(40))
     last_name = db.Column(db.String(40))
+    phone_number = db.Column(db.String(10))
 
-    # xxx = db.relationship()
+    recordings = db.relationship("Recording")
 
     def __repr__(self):
         """Provide helpful representation when printed"""
@@ -29,7 +30,18 @@ class User(db.Model):
                                   self.email,
                                   self.password,
                                   self.first_name,
-                                  self.last_name)
+                                  self.last_name,
+                                  self.phone_number)
+
+
+class Recording(db.Model):
+    """Stores awkward recordings by user"""
+
+    __tablename__ = "recordings"
+
+    recording_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+
 
 ##############################################################################
 # Helper functions
