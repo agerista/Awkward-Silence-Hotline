@@ -49,6 +49,7 @@ def awkward_silence_hotline():
              Press 2 for I have foot in mouth disease.
              Press 3 for my boyfriend just broke up with me and I'm pregnant.
              Press 4 for I just can't.
+             Press 5 to make your own recording
              Press any other key to start over.""")
 
     resp.append(g)
@@ -66,8 +67,10 @@ def awkward_menu():
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
         resp.say("Yes well I declare, uhhhhhh, ummmmmm, well")
-        resp.append(resp.pause(5))
-        resp.append(resp.say("I mean I...uhhh..."))
+        resp.pause(10)
+        resp.say("I mean I...uhhh...")
+        resp.pause(10)
+        resp.say("I...uhhh...ummmmmm")
 
         return str(resp)
 
@@ -75,8 +78,12 @@ def awkward_menu():
 
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup.")
-        resp.pause(5)
+        resp.pause(15)
         resp.say("well...")
+        resp.pause(15)
+        resp.say("yeah...")
+        resp.pause(15)
+        resp.say("ha ahhh ha...")
 
         return str(resp)
 
@@ -86,6 +93,13 @@ def awkward_menu():
         resp.say("I believe I'm about to throw up.")
         resp.pause(5)
         resp.say("don't you love me?...")
+        resp.pause(15)
+        resp.say("you...")
+        resp.pause(15)
+        resp.say("you said...")
+        resp.pause(15)
+        resp.say("that that that...")
+        resp.pause(30)
 
         return str(resp)
 
@@ -93,8 +107,16 @@ def awkward_menu():
 
         resp = VoiceResponse()
         resp.say("The secret ingredient is puppy tears.")
-        resp.pause(5)
+        resp.pause(20)
         resp.say("I mean salt")
+
+        return str(resp)
+
+    elif digit_pressed == "5":
+
+        resp = VoiceResponse()
+        resp.say("Record your awkward silence after the tone.")
+        resp.record(maxLength="30", action="/handle-recording")
 
         return str(resp)
 
@@ -110,7 +132,7 @@ def handle_recording():
     recording_url = request.values.get("RecordingUrl", None)
 
     resp = VoiceResponse()
-    resp.say("Thanks for howling... take a listen to what you howled.")
+    resp.say("Thanks for that... take a listen to what you recorded.")
     resp.play(recording_url)
     resp.say("Goodbye.")
     return str(resp)
