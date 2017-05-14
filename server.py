@@ -9,6 +9,13 @@ from twilio.twiml.voice_response import VoiceResponse
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 
+callers = {
+    "+14158675309": "Curious George",
+    "+14158675310": "Boots",
+    "+14158675311": "Virgil",
+}
+
+
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
     """Respond to incoming requests."""
@@ -36,6 +43,7 @@ def hello_monkey():
 
     return str(resp)
 
+
 @app.route("/handle-key", methods=['GET', 'POST'])
 def handle_key():
     """Handle key press from a user."""
@@ -59,6 +67,7 @@ def handle_key():
     # If the caller pressed anything but 1, redirect them to the homepage.
     else:
         return redirect("/")
+
 
 @app.route("/handle-recording", methods=['GET', 'POST'])
 def handle_recording():
