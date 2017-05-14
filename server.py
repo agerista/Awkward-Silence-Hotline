@@ -1,5 +1,6 @@
 
-import os, re;
+import os, re
+import time
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
 # from faker import Factory
 # from twilio.jwt.access_token import AccessToken
@@ -39,12 +40,14 @@ def awkward_silence_hotline():
     # resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
 
     # Gather digits.
-    with resp.gather(timeout="15", numDigits=1, action="/handle-key", method="POST") as g:
-        g.say("""I am the Lord Mayor of Awkward Town, press 1.
-                 Press 2 for I have foot in mouth disease.
-                 Press 3 for my boyfriend just broke up with me and I'm pregnant.
-                 Press 4 for I just can't.
-                 Press any other key to start over.""")
+    g = Gather(timeout="15", numDigits=1, action="/handle-key", method="POST")
+    g.say("""I am the Lord Mayor of Awkward Town, press 1.
+             Press 2 for I have foot in mouth disease.
+             Press 3 for my boyfriend just broke up with me and I'm pregnant.
+             Press 4 for I just can't.
+             Press any other key to start over.""")
+
+    resp.append(g)
 
     return str(resp)
 
@@ -55,23 +58,29 @@ def awkward_menu():
 
     digit_pressed = request.values.get('Digits', None)
     if digit_pressed == "1":
+
         resp = VoiceResponse()
         # Dial (310) 555-1212 - connect that number to the incoming caller.
         resp.say("Yes well I declare, uhhhhhh, ummmmmm, well" + time.sleep(5) + "I mean I...uhhh...")
+
         return str(resp)
 
     elif digit_pressed == "2":
+        
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup." + time.sleep(5) + "well...")
-        resp.record(maxLength="30", action="/handle-recording", method="POST")
+        
         return str(resp)
 
     elif digit_pressed == "3":
+        
         resp = VoiceResponse()
         resp.say("I believe I'm about to throw up." + time.sleep(5) + "don't you love me?...")
+        
         return str(resp)
 
     elif digit_pressed == "4":
+        
         resp = VoiceResponse()
         resp.say("The secret ingredient is puppy tears." + time.sleep(5) + "I mean salt")
 
