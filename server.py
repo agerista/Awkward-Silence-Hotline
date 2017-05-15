@@ -165,7 +165,7 @@ def awkward_text():
 def sms_reply():
     """responds to incoming text messages automatically
     """
-    # trying REST_API agian, rather than TwilML
+    # trying REST_API again, rather than TwilML
     sender_phone = request.form.get("From")
     response = sms_functions.send_sms_message(sender_phone)
     return render_template("confirm_sms", response=response)
