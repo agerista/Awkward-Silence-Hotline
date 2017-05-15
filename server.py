@@ -1,11 +1,12 @@
+"""Awkward Silence Hotline"""
 
 import os, re
-import time
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
 # from faker import Factory
 # from twilio.jwt.access_token import AccessToken
+from datetime import date
 from twilio import twiml
-# from twilio.rest import Client
+from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse, Gather
 from twilio.twiml.messaging_response import MessagingResponse
 import sms_functions
@@ -15,6 +16,7 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 app.jinja_env.endefined = StrictUndefined
+
 
 callers = {
     "+14158675309": "Curious George",
@@ -142,7 +144,7 @@ def handle_recording():
 def awkward_text():
     """sends text to requested number."""
     # TODO need to create a page with form that accepts users phone input
-    phone_raw = request.form.get("recipient", "415-969-4250")
+    phone_raw = request.form.get("recipient")
 
     response = sms_functions.eval_phone(phone_raw)
 
@@ -151,15 +153,18 @@ def awkward_text():
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
-    resp = MessagingResponse()
+    """responds to incoming text messages automatically
+    """
+    # trying REST_API agian, rather than TwilML
+    sender_phone = request.form.get("From")
+    response = sms_functions.send_sms_message(sender_phone)
+    return render_template("confirm_sms", response=response)
 
-    sms_string = sms_functions.get_message()
 
-    resp.message(sms_string)
-
-    return str(resp)
-
-
+    # resp = MessagingResponse()
+    # sms_string = sms_functions.get_message()
+    # resp.message(sms_string)
+    # return str(resp)
 
 ################################################################################
 if __name__ == "__main__":

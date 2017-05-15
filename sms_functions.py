@@ -44,4 +44,4 @@ def send_sms_message(recepient_phone):
 def get_message():
     """TODO  build dynamic message generation here
     """
-    return "   ... .. .  ...  :|          ......."
+    return "     .   .  <crickets>    .    .   :/     .    erm...     ......."
