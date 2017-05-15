@@ -17,8 +17,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 app.jinja_env.endefined = StrictUndefined
 
-account_sid = os.environ["TWILIO_ACCOUNT_SID"]
-auth_token = os.environ["TWILIO_AUTH_TOKEN"]
 
 callers = {
     "+14158675309": "Curious George",
@@ -58,7 +56,7 @@ def awkward_silence_hotline():
 
     resp.append(g)
 
-    return (str(resp), render_template("index.html"))
+    return (str(resp), "index.html")
 
 
 @app.route("/handle-key", methods=['GET', 'POST'])
@@ -79,14 +77,6 @@ def awkward_menu():
         return str(resp)
 
     elif digit_pressed == "2":
-
-        client = Client(account_sid, auth_token)
-
-        # client.recordings.play("CA67fdd24aafcbb577f832f480c78dd7f5")
-        recordings = client.recordings.list(date_created=date(2017, 05, 14))
-
-        for recording in recordings:
-            print recording.play()
 
         resp = VoiceResponse()
         resp.say("My shower cam is no bigger than that fly in your soup.")
