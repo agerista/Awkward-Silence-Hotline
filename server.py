@@ -151,19 +151,35 @@ def handle_recording():
 #     return render_template("confirm_sms", response=response)
 
 
+@app.route("/sms", methods=['GET', 'POST'])
+def sms_reply():
+    """responds to incoming text messages automatically
+    """
+    # trying REST_API again, rather than TwilML
+    sender_phone = request.form.get("From")
+    response = sms_functions.send_sms_message(sender_phone)
+    return render_template("confirm_sms", response=response)
+
+
 # @app.route("/sms", methods=['GET', 'POST'])
 # def sms_reply():
 #     """responds to incoming text messages automatically
 #     """
-#     # trying REST_API agian, rather than TwilML
-#     sender_phone = request.form.get("From")
-#     response = sms_functions.send_sms_message(sender_phone)
-#     return render_template("confirm_sms", response=response)
+    # trying REST_API agian, rather than TwilML
+    # sender_phone = request.form.get("From")
+    # response = sms_functions.send_sms_message(sender_phone)
+    # return render_template("confirm_sms", response=response)
 
 #     resp = MessagingResponse()
 #     sms_string = sms_functions.get_message()
 #     resp.message(sms_string)
 #     return str(resp)
+
+    # resp = MessagingResponse()
+    # sms_string = sms_functions.get_message()
+    # resp.message(sms_string)
+    # return str(resp)
+
 
 ################################################################################
 if __name__ == "__main__":

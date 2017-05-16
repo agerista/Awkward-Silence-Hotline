@@ -2,13 +2,16 @@
 
 ## Overview 
 
-Awkward Silence Hotline was created as a part of the [Stupid Sh*! and Terrible Ideas 
-That No One Needs Hackathon](http://stupidhackathon.github.io/) held on May 13-14, 
-2017 at [Noisebridge](https://www.noisebridge.net/). 
+[Awkward Silence Hotline](https://awkward-silence-hotline.herokuapp.com/) 
+was created as a part of the 
+[Stupid Sh*! and Terrible Ideas That No One Needs Hackathon]
+(http://stupidhackathon.github.io/) held on May 13-14, 2017 at 
+[Noisebridge](https://www.noisebridge.net/). 
 
 ## The Team
 
 [Amanda Crawford](https://github.com/agerista)
+
 [Renee Balmert](https://github.com/tremlab)
 
 ## The Project
